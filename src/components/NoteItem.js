@@ -1,6 +1,14 @@
 import NoteFooter from "./NoteFooter";
 
-function NoteItem({ id, title, body, createdAt, archived, onDelete }) {
+function NoteItem({
+  id,
+  title,
+  body,
+  createdAt,
+  onArchieved,
+  onDelete,
+  btnTitle,
+}) {
   return (
     <div className="note-item">
       <div className="note-item__content">
@@ -8,7 +16,12 @@ function NoteItem({ id, title, body, createdAt, archived, onDelete }) {
         <p className="note-item__date">{createdAt}</p>
         <p className="note-item__body">{body}</p>
       </div>
-      <NoteFooter id={id} onDelete={onDelete} />
+      <NoteFooter
+        id={id}
+        onDelete={onDelete}
+        onArchieved={onArchieved}
+        btnTitle={btnTitle}
+      />
     </div>
   );
 }
