@@ -1,4 +1,5 @@
 import React from "react";
+import InputNotes from "./components/InputNotes.js";
 import NoteList from "./components/NoteList.js";
 import { getInitialData } from "./utils/index.js";
 
@@ -11,6 +12,7 @@ class App extends React.Component {
     };
     this.onDeleteHanlder = this.onDeleteHanlder.bind(this);
     this.onArchievedHandler = this.onArchievedHandler.bind(this);
+    this.onAddNoteHandler = this.onAddNoteHandler.bind(this);
   }
 
   onDeleteHanlder(id) {
@@ -29,6 +31,21 @@ class App extends React.Component {
     });
   }
 
+  onAddNoteHandler({ title, body }) {
+    this.setState((prevState) => ({
+      notes: [
+        ...prevState.notes,
+        {
+          id: +new Date(),
+          title,
+          body,
+          archived: false,
+          createdAt: new Date().toISOString(),
+        },
+      ],
+    }));
+  }
+
   render() {
     const archived = this.state.notes.filter((note) => note.archived === true);
     const unarchieved = this.state.notes.filter(
@@ -36,6 +53,7 @@ class App extends React.Component {
     );
     return (
       <div className="note-app__body">
+        <InputNotes addNote={this.onAddNoteHandler} />
         <h2>Catatan Aktif</h2>
         <NoteList
           notes={unarchieved}
