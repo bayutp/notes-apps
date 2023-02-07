@@ -1,5 +1,6 @@
 import NoteEmpty from "./NoteEmpty";
 import NoteItem from "./NoteItem";
+import { showFormattedDate } from "../utils";
 
 function NoteList({ notes, onDelete, isEmpty, onArchieved, btnTitle }) {
   return isEmpty ? (
@@ -11,6 +12,7 @@ function NoteList({ notes, onDelete, isEmpty, onArchieved, btnTitle }) {
           key={note.id}
           {...note}
           id={note.id}
+          createdAt={showFormattedDate(note.createdAt)}
           onDelete={onDelete}
           onArchieved={onArchieved}
           btnTitle={btnTitle}
